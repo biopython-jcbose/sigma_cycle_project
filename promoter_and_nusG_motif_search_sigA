@@ -1,0 +1,49 @@
+import pandas as pd
+from Bio import SeqIO
+with open("C:PATH/NAME.fasta") as fasta_file:
+     identifiers = []
+     rvidentifiers = []
+     lengths = []
+     for seq_record in SeqIO.parse("NAME.fasta", "fasta"):
+      identifiers.append(str(seq_record.seq))
+      lengths.append(len(seq_record.seq))
+      
+      
+      records = (seq_record.reverse_complement(id="rc_"+seq_record.id, description = "reverse complement"))
+      rvidentifiers.append((str(records.seq)))
+      lenrv =[]
+      lenrv.append(len(records.seq))
+
+      d = {"Sequence":identifiers,"Len":lengths, "Reverse":rvidentifiers, "LenRV":lenrv }
+      
+data = pd.DataFrame(d)
+data["label"]="MTB"
+data
+#print(data)
+
+from Bio.Seq import Seq
+from Bio import SeqUtils
+import numpy as np
+import csv 
+consensus = "TTGHNH"
+consensus2 = "TANNNT"
+consensus3= "TTNTTT"
+
+genome = str(identifiers)
+seq1 = SeqUtils.nt_search(genome,consensus)
+print(seq1,"SIGA -35 like CONSENSUS")
+
+genome = str(identifiers)
+seq2 = SeqUtils.nt_search(genome,consensus2)
+print(seq2,"SIGA -10 like CONSENSUS")
+
+genome2 = str(rvidentifiers)
+seqrvA1 = SeqUtils.nt_search(genome2,consensus)
+print(seqrvA1, "SIGA -35 LIKE CONSENSUS IN REVERSE")
+
+seqrvA2 = SeqUtils.nt_search(genome2,consensus2)
+print(seqrvA2, "SIGA -10A LIKE CONSENSUS IN REVERSE")
+
+genome3 = str(identifiers)
+seqNusG = SeqUtils.nt_search(genome3,consensus3)
+print(seqNusG,"NusG motif")
