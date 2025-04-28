@@ -29,21 +29,28 @@ consensus = "TTGHNH"
 consensus2 = "TANNNT"
 consensus3= "TTNTTT"
 
+#template_strand
+
+#PROMOTER_-35_LIKE_in_template_strand
 genome = str(identifiers)
 seq1 = SeqUtils.nt_search(genome,consensus)
 print(seq1,"SIGA -35 like CONSENSUS")
 
+#PROMOTER_-10_LIKE_in_template_strand
 genome = str(identifiers)
 seq2 = SeqUtils.nt_search(genome,consensus2)
 print(seq2,"SIGA -10 like CONSENSUS")
 
+#PROMOTER_-35_LIKE_in_reverse_complement_strand
 genome2 = str(rvidentifiers)
 seqrvA1 = SeqUtils.nt_search(genome2,consensus)
-print(seqrvA1, "SIGA -35 LIKE CONSENSUS IN REVERSE")
+print(seqrvA1, "SIGA -35 LIKE CONSENSUS IN RV SEQ")
 
+#PROMOTER_-10_LIKE_in_reverse_complement_strand
 seqrvA2 = SeqUtils.nt_search(genome2,consensus2)
-print(seqrvA2, "SIGA -10A LIKE CONSENSUS IN REVERSE")
+print(seqrvA2, "SIGA -10A LIKE CONSENSUS IN RV SEQ")
 
+#NusG_motif_search
 genome3 = str(identifiers)
 seqNusG = SeqUtils.nt_search(genome3,consensus3)
 print(seqNusG,"NusG motif")
