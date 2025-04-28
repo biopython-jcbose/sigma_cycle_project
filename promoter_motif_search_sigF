@@ -1,0 +1,117 @@
+import pandas as pd
+from Bio import SeqIO
+with open("C:/PATH/FILENAME.fasta") as fasta_file:
+     identifiers = []
+     rvidentifiers = []
+     lengths = []
+     for seq_record in SeqIO.parse("FILENAME.fasta", "fasta"):
+      identifiers.append(str(seq_record.seq))
+      lengths.append(len(seq_record.seq))
+      
+      
+      records = (seq_record.reverse_complement(id="rc_"+seq_record.id, description = "reverse complement"))
+      rvidentifiers.append((str(records.seq)))
+      lenrv =[]
+      lenrv.append(len(records.seq))
+
+      d = {"Sequence":identifiers,"Len":lengths, "Reverse":rvidentifiers, "LenRV":lenrv }
+      
+data = pd.DataFrame(d)
+data["label"]="MTB"
+data
+
+from Bio.Seq import Seq
+from Bio import SeqUtils
+import numpy as np
+import csv 
+
+genome = str(identifiers)
+genome2 = str(rvidentifiers)
+
+#promoter_-35_like
+consensusF1 = "GGGTTT"
+consensusF2= "GGATTG"
+consensusF3="CGGTCA"
+consensusF4="CGGTCA"
+consensusF5="CGGTTT"
+consensusF6="AAGTTT"
+consensusF7="TGGAAT"
+consensusF8="TGGAAG"
+
+#template_strand
+seqF1 = SeqUtils.nt_search(genome,consensusF1)
+print(seqF1,"-35F FOUND IN SEQUENCE")
+seqF2 = SeqUtils.nt_search(genome,consensusF2)
+print(seqF2,"-35F FOUND IN SEQUENCE")
+seqF3 = SeqUtils.nt_search(genome,consensusF3)
+print(seqF3,"-35F FOUND IN SEQUENCE")
+seqF4 = SeqUtils.nt_search(genome,consensusF4)
+print(seqF4,"-35F FOUND IN SEQUENCE")
+seqF5 = SeqUtils.nt_search(genome,consensusF5)
+print(seqF5,"-35F FOUND IN SEQUENCE")
+seqF6 = SeqUtils.nt_search(genome,consensusF6)
+print(seqF6,"-35F FOUND IN SEQUENCE")
+seqF7 = SeqUtils.nt_search(genome,consensusF7)
+print(seqF7,"-35F FOUND IN SEQUENCE")
+seqF8 = SeqUtils.nt_search(genome,consensusF8)
+print(seqF8,"-35F FOUND IN SEQUENCE")
+
+#reverse_complement_strand
+seqF1RV = SeqUtils.nt_search(genome2,consensusF1)
+print(seqF1RV,"-35F FOUND IN RV SEQUENCE")
+seqF2RV = SeqUtils.nt_search(genome2,consensusF2)
+print(seqF2RV,"-35F RV FOUND IN  RV SEQUENCE")
+seqF3RV = SeqUtils.nt_search(genome2,consensusF3)
+print(seqF3RV,"-35F RV FOUND IN RV SEQUENCE")
+seqF4RV = SeqUtils.nt_search(genome2,consensusF4)
+print(seqF4RV,"-35F FOUND IN RV SEQUENCE")
+seqF5RV = SeqUtils.nt_search(genome2,consensusF5)
+print(seqF5RV,"-35F FOUND IN RV SEQUENCE")
+seqF6RV = SeqUtils.nt_search(genome2,consensusF6)
+print(seqF6RV,"-35F FOUND IN RV SEQUENCE")
+seqF7RV = SeqUtils.nt_search(genome2,consensusF7)
+print(seqF7RV,"-35F FOUND IN RV SEQUENCE")
+seqF8RV = SeqUtils.nt_search(genome2,consensusF8)
+print(seqF8RV,"-35F FOUND IN RV SEQUENCE")
+
+
+#promoter_-10_like
+consensusFF1 = "GAACAT"
+consensusFF2= "GGGTAC"
+consensusFF3="GGGCAT"
+consensusFF4="GGGTAT"
+consensusFF5="CGATAG"
+consensusFF6="GGGTAG"
+consensusFF7="GGGTTC"
+
+#template_strand
+seqFF1 = SeqUtils.nt_search(genome,consensusFF1)
+print(seqFF1,"-10F FOUND IN SEQUENCE")
+seqFF2 = SeqUtils.nt_search(genome,consensusFF2)
+print(seqFF2,"-10F FOUND IN SEQUENCE")
+seqFF3 = SeqUtils.nt_search(genome,consensusFF3)
+print(seqFF3,"-10F FOUND IN SEQUENCE")
+seqFF4 = SeqUtils.nt_search(genome,consensusFF4)
+print(seqFF4,"-10F FOUND IN SEQUENCE")
+seqFF5 = SeqUtils.nt_search(genome,consensusFF5)
+print(seqFF5,"-10F FOUND IN SEQUENCE")
+seqFF6 = SeqUtils.nt_search(genome,consensusFF6)
+print(seqFF6,"-10F FOUND IN SEQUENCE")
+seqFF7 = SeqUtils.nt_search(genome,consensusFF7)
+print(seqFF7,"-10F FOUND IN SEQUENCE")
+
+#reverse_complement_strand
+seqFF1RV = SeqUtils.nt_search(genome2,consensusFF1)
+print(seqFF1,"-10F FOUND IN SEQUENCE")
+seqFF2RV = SeqUtils.nt_search(genome2,consensusFF2)
+print(seqFF2RV,"-10F FOUND IN - SEQUENCE")
+seqFF3RV = SeqUtils.nt_search(genome2,consensusFF3)
+print(seqFF3RV,"-10F FOUND IN -SEQUENCE")
+seqFF4RV = SeqUtils.nt_search(genome2,consensusFF4)
+print(seqFF4RV,"-10F FOUND IN -SEQUENCE")
+seqFF5RV = SeqUtils.nt_search(genome2,consensusFF5)
+print(seqFF5RV,"-10F FOUND IN -SEQUENCE")
+seqFF6RV = SeqUtils.nt_search(genome,consensusFF6)
+print(seqFF6RV,"-10F FOUND IN -SEQUENCE")
+seqFF7RV = SeqUtils.nt_search(genome2,consensusFF7)
+print(seqFF7RV,"-10F FOUND IN -SEQUENCE")
