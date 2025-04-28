@@ -1,0 +1,97 @@
+import pandas as pd
+from Bio import SeqIO
+with open("C:PATH/FILENAME.fasta") as fasta_file:
+     identifiers = []
+     rvidentifiers = []
+     lengths = []
+     for seq_record in SeqIO.parse("FILENAME.fasta", "fasta"):
+      identifiers.append(str(seq_record.seq))
+      lengths.append(len(seq_record.seq))
+      
+      
+      records = (seq_record.reverse_complement(id="rc_"+seq_record.id, description = "reverse complement"))
+      rvidentifiers.append((str(records.seq)))
+      lenrv =[]
+      lenrv.append(len(records.seq))
+
+      d = {"Sequence":identifiers,"Len":lengths, "Reverse":rvidentifiers, "LenRV":lenrv }
+      
+data = pd.DataFrame(d)
+data["label"]="MTB"
+data
+
+from Bio.Seq import Seq
+from Bio import SeqUtils
+import numpy as np
+import csv 
+
+genome = str(identifiers)
+genome2 = str(rvidentifiers)
+
+# SigE-35 promoter-like
+
+consensusE1 = "GGAATA"
+consensusE2= "ATAGCG"
+consensusE3="GGAACA"
+consensusE4="GGAAAT"
+consensusE5="GGGAAC"
+consensusE6="GGAACT"
+
+#template_search
+seqE1 = SeqUtils.nt_search(genome,consensusE1)
+print(seqE1,"-35E FOUND IN SEQUENCE")
+seqE2 = SeqUtils.nt_search(genome,consensusE2)
+print(seqE2,"-35E FOUND IN SEQUENCE")
+seqE3 = SeqUtils.nt_search(genome,consensusE3)
+print(seqE3,"-35E FOUND IN SEQUENCE")
+seqE4 = SeqUtils.nt_search(genome,consensusE4)
+print(seqE4,"-35E FOUND IN SEQUENCE")
+seqE5 = SeqUtils.nt_search(genome,consensusE5)
+print(seqE5,"-35E FOUND IN SEQUENCE")
+seqE6 = SeqUtils.nt_search(genome,consensusE6)
+print(seqE6,"-35E FOUND IN SEQUENCE")
+
+#reverse_complement_template_search
+seqE1RV = SeqUtils.nt_search(genome2,consensusE1)
+print(seqE1RV,"-35E FOUND IN SEQUENCE")
+seqE2RV = SeqUtils.nt_search(genome2,consensusE2)
+print(seqE2RV,"-35E FOUND IN RV SEQUENCE")
+seqE3RV = SeqUtils.nt_search(genome2,consensusE3)
+print(seqE3RV,"-35E FOUND IN RVSEQUENCE")
+seqE4RV = SeqUtils.nt_search(genome2,consensusE4)
+print(seqE4RV,"-35E FOUND IN RVSEQUENCE")
+seqE5RV = SeqUtils.nt_search(genome2,consensusE5)
+print(seqE5RV,"-35E FOUND IN RVSEQUENCE")
+seqE6RV = SeqUtils.nt_search(genome2,consensusE6)
+print(seqE6RV,"-35E FOUND IN RVSEQUENCE")
+
+# SigE-10 promoter-like
+consensusEE1 = "CGTTG"
+consensusEE2= "GGTTG"
+consensusEE3="CGTTA"
+consensusEE4="AGTTA"
+consensusEE5="GGTTC"
+
+#template_search
+seqEE1 = SeqUtils.nt_search(genome,consensusEE1)
+print(seqEE1,"-10E FOUND IN SEQUENCE")
+seqEE2 = SeqUtils.nt_search(genome,consensusEE2)
+print(seqEE2,"-10E FOUND IN SEQUENCE")
+seqEE3 = SeqUtils.nt_search(genome,consensusEE3)
+print(seqEE3,"-10E FOUND IN SEQUENCE")
+seqEE4 = SeqUtils.nt_search(genome,consensusEE4)
+print(seqEE4,"-10E FOUND IN SEQUENCE")
+seqEE5 = SeqUtils.nt_search(genome,consensusEE5)
+print(seqEE5,"-10E FOUND IN SEQUENCE")
+
+#reverse_complement_template_search
+seqEE1RV = SeqUtils.nt_search(genome2,consensusEE1)
+print(seqEE1RV,"-10E FOUND IN RVSEQUENCE")
+seqEE2RV = SeqUtils.nt_search(genome2,consensusEE2)
+print(seqEE2RV,"-10E FOUND IN RVSEQUENCE")
+seqEE3RV = SeqUtils.nt_search(genome2,consensusEE3)
+print(seqEE3RV,"-10E FOUND IN RVSEQUENCE")
+seqEE4RV = SeqUtils.nt_search(genome2,consensusEE4)
+print(seqEE4RV,"-10E FOUND IN RVSEQUENCE")
+seqEE5RV = SeqUtils.nt_search(genome2,consensusEE5)
+print(seqEE5RV,"-10E FOUND IN RVSEQUENCE")
