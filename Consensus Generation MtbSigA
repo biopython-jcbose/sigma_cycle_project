@@ -1,0 +1,43 @@
+from Bio import motifs
+from Bio.Seq import Seq
+import re
+#sigA -10
+instances = [
+        Seq("TACACT"),
+         Seq("TAGGAT"),
+         Seq("TACAAT"),
+         Seq("TATTGT"),
+         Seq("TCTAGT"),
+         Seq("TATGCT"),
+         Seq("TAGACT"),
+         Seq("TATAGA"),
+         Seq("TATTGT"),
+         Seq("TAGCCT"),
+         Seq("AAGAAT"),
+         Seq("TAATAT"),
+         Seq("TAGATT"),
+         Seq("TACGGT")]
+ 
+ #sigA -35           
+instances2=[
+            Seq("TTGTAC"),
+             Seq("TTGCGA"),
+             Seq("TGTACT"),
+             Seq("TTGACC"),
+             Seq("TTGTCA"),
+             Seq("TTGACT"),
+             Seq("TTGAGT"),
+             Seq("TTGTGC"),
+             Seq("TTGCAC"),
+             Seq("TTGCCA"),
+             Seq("TGGCCC"),
+             Seq("TTGATC")]
+            
+
+m = motifs.create(instances)
+m2 = motifs.create(instances2)
+#print(m)
+#print(m.counts)
+#print(m.consensus)
+print(m.degenerate_consensus)
+print(m2.degenerate_consensus)
